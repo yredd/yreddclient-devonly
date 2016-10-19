@@ -21,6 +21,7 @@
             <ComboBoxItem Content="MagicMod - MikaalSky" x:Name="mod_magicmod"/>
         </ComboBox>
         <Button x:Name="installButton" Content="Install" Margin="10,0,10,10" Click="button_Click" Height="20" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="textBox" Margin="10,171,12,35" TextWrapping="Wrap" Text="Running Directory Detection Script... Done.&#xD;&#xA;Running Game Version Detection Script... Done.&#xD;&#xA;Downloading Mod Metadata... Done&#xD;&#xA;Mod Compatible? YES&#xD;&#xA;Installing Mod... Done&#xD;&#xA;Complete in 1:32:23" IsEnabled="False"/>
 
     </Grid>
 </Window>
