@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:yreddclient_devonly"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="yredd dev client" VerticalAlignment="Top" FontSize="20" ToolTip="why are you hovering over this lel" Width="497" Grid.ColumnSpan="2" Height="27"/>
+        <TextBlock x:Name="desc" HorizontalAlignment="Left" Margin="10,42,0,0" TextWrapping="Wrap" Text="This is that and that is this" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="2" Height="16"/>
+        <TextBlock x:Name="gTitle" HorizontalAlignment="Left" Margin="10,85,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="497" Text="Game"/>
+        <ComboBox x:Name="gSelect" Margin="10,101,10,0" VerticalAlignment="Top" Height="22">
+            <ComboBoxItem Content="Minecraft (1.10)" Name="game_minecraft" IsSelected="True"/>
+            <ComboBoxItem Content="Grand Theft Auto 5" Name="game_gta5"/>
+        </ComboBox>
+        <TextBlock x:Name="mTitle" HorizontalAlignment="Left" Margin="10,128,10,0" TextWrapping="Wrap" Text="Mod To Install" VerticalAlignment="Top" Width="497"/>
+        <ComboBox x:Name="mSelect" Margin="10,144,10,0" VerticalAlignment="Top" Height="22">
+            <ComboBoxItem Content="Forge - MinecraftForge" x:Name="mod_forge"/>
+            <ComboBoxItem Content="MagicMod - MikaalSky" x:Name="mod_magicmod"/>
+        </ComboBox>
+        <Button x:Name="installButton" Content="Install" Margin="10,0,10,10" Click="button_Click" Height="20" VerticalAlignment="Bottom"/>
+
     </Grid>
 </Window>
