@@ -13,5 +13,6 @@ namespace yreddclient_devonly
     /// </summary>
     public partial class App : Application
     {
+        string plz = "no";
     }
 }
