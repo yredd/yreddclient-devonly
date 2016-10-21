@@ -32,11 +32,17 @@ namespace yreddclient_devonly
             //gTitle.Text = "aabbcc";
             InitializeComponent();
         }
+        Boolean init = false;
 
         public override void EndInit()
         {
             base.EndInit();
             Title = "yredd dev client";
+            if (!init)
+            {
+                updateMods(null, null);
+                init = true;
+            }
         }
         private void log(string toAppend)
         {
@@ -83,6 +89,15 @@ namespace yreddclient_devonly
             }catch(HttpRequestException e) { }
             return null;
         }
+        private void gameChange(object sender, SelectionChangedEventArgs e)
+        {
+            if (mSelect != null) {
+                mSelect.IsEnabled = false;
+                mSelect.SelectedIndex = -1;
+                updateMods(sender, null);
+            }
+        }
+
         private async void updateMods(object sender, RoutedEventArgs e)
         {
             log("Updating mod listings...");
@@ -97,10 +112,24 @@ namespace yreddclient_devonly
                 if (mods != null) {
                     //log(mods.ToString());
                     var mud = (JObject) mods.GetValue("mods");
+                    var unorderedKeys = new List<string>();
                     foreach (var mod in mud)
                     {
-                        log(mod.Key + ": " + mod.Value);
+                        //log(mod.Key + ": " + mod.Value);
+                        unorderedKeys.Add(mod.Key);
                     }
+                    mSelect.Items.Clear();
+                    unorderedKeys.Sort();
+                    mSelect.IsEnabled = true;
+                    foreach (var key in unorderedKeys)
+                    {
+                        var mod = (JObject) mud.GetValue(key);
+                        var combo = new ComboBoxItem();
+                        combo.Name = key;
+                        combo.Content = mod.GetValue("displayName") + " - v" + mod.GetValue("currentVersion"); 
+                        mSelect.Items.Add(combo);
+                    }
+                    log("Fetched mod data!");
                 }else
                 {
                     log("Failed to fetch " + game + " mods.");

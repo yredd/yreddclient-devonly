@@ -6,24 +6,23 @@
         xmlns:local="clr-namespace:yreddclient_devonly"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="480" Width="570">
     <Grid>
         <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="yredd dev client" VerticalAlignment="Top" FontSize="20" ToolTip="why are you hovering over this lel" Width="497" Grid.ColumnSpan="2" Height="27"/>
         <TextBlock x:Name="desc" HorizontalAlignment="Left" Margin="10,42,0,0" TextWrapping="Wrap" Text="This is that and that is this" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="2" Height="16"/>
         <TextBlock x:Name="gTitle" HorizontalAlignment="Left" Margin="10,85,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="497" Text="Game"/>
-        <ComboBox x:Name="gSelect" Margin="10,101,0,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Left" Width="366">
+        <ComboBox x:Name="gSelect" SelectionChanged="gameChange" Margin="10,101,150,0" VerticalAlignment="Top" Height="22">
             <ComboBoxItem Content="Minecraft (1.10)" Name="minecraft" IsSelected="True"/>
             <ComboBoxItem Content="Grand Theft Auto 5" Name="gtav"/>
         </ComboBox>
         <TextBlock x:Name="mTitle" HorizontalAlignment="Left" Margin="10,128,10,0" TextWrapping="Wrap" Text="Mod To Install" VerticalAlignment="Top" Width="497"/>
-        <ComboBox x:Name="mSelect" Margin="10,144,10,0" VerticalAlignment="Top" Height="22">
-            <ComboBoxItem Content="Forge - MinecraftForge" x:Name="forge"/>
-            <ComboBoxItem Content="MagicMod - MikaalSky" x:Name="magicmod"/>
+        <ComboBox x:Name="mSelect" Margin="10,144,10,0" VerticalAlignment="Top" Height="22" IsEnabled="False" >
         </ComboBox>
         <Button x:Name="installButton" Content="Install" Margin="10,0,10,10" Height="20" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="logs" Margin="10,171,12,35" TextWrapping="Wrap" Text="App started successfully." VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" IsReadOnly="True"/>
+        <TextBox x:Name="logs" Margin="10,171,10,60" TextWrapping="Wrap" Text="App started successfully." VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" IsReadOnly="True"/>
         <Button x:Name="chek" Content="Check Connection" Margin="0,10,10,0" VerticalAlignment="Top" Click="checkConnection" HorizontalAlignment="Right" Width="115"/>
-        <Button x:Name="update" Click="updateMods" Content="Update Mod Listings" Margin="381,101,12,0" VerticalAlignment="Top" Height="22"/>
+        <Button x:Name="update" Click="updateMods" Content="Update Mod Listings" Margin="419,101,10,0" VerticalAlignment="Top" Height="22"/>
+        <ProgressBar Margin="10,0,10,38" Height="15" VerticalAlignment="Bottom" Value="65"/>
 
     </Grid>
 </Window>
