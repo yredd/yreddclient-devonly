@@ -45,3 +45,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Release files/folders
+bin
+obj
+yreddclient-devonly/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
