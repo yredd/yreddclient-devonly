@@ -27,7 +27,7 @@ namespace yreddclient_devonly
     {
         public MainWindow()
         {
-            App tt = (yreddclient_devonly.App) App.Current;
+            App tt = (yreddclient_devonly.App)App.Current;
             //Title = "aabb";
             //gTitle.Text = "aabbcc";
             InitializeComponent();
@@ -65,12 +65,12 @@ namespace yreddclient_devonly
                 {
                     log("Connection working? sC: " + resp.StatusCode);
                 }
-            }catch(HttpRequestException ERR)
+            } catch (HttpRequestException ERR)
             {
                 log("Exception: " + ERR.Message);
-       
+
             }
-            
+
         }
 
         private async Task<JObject> GetJson(string uri)
@@ -83,10 +83,10 @@ namespace yreddclient_devonly
                 if (req.IsSuccessStatusCode)
                 {
                     var rawString = await req.Content.ReadAsStringAsync();
-                    return (JObject) JsonConvert.DeserializeObject(rawString);
+                    return (JObject)JsonConvert.DeserializeObject(rawString);
                 }
-                
-            }catch(HttpRequestException e) { }
+
+            } catch (HttpRequestException e) { }
             return null;
         }
         private void gameChange(object sender, SelectionChangedEventArgs e)
@@ -102,16 +102,16 @@ namespace yreddclient_devonly
         {
             log("Updating mod listings...");
             var game1 = gSelect.SelectedItem;
-            if(game1 == null)
+            if (game1 == null)
             {
                 log("Error!! No game selected??");
-            }else
+            } else
             {
                 var game = ((ComboBoxItem)game1).Name;
                 var mods = await GetJson("http://localhost/mods/" + game + "/list");
                 if (mods != null) {
                     //log(mods.ToString());
-                    var mud = (JObject) mods.GetValue("mods");
+                    var mud = (JObject)mods.GetValue("mods");
                     var unorderedKeys = new List<string>();
                     foreach (var mod in mud)
                     {
@@ -123,18 +123,37 @@ namespace yreddclient_devonly
                     mSelect.IsEnabled = true;
                     foreach (var key in unorderedKeys)
                     {
-                        var mod = (JObject) mud.GetValue(key);
+                        var mod = (JObject)mud.GetValue(key);
                         var combo = new ComboBoxItem();
                         combo.Name = key;
-                        combo.Content = mod.GetValue("displayName") + " - v" + mod.GetValue("currentVersion"); 
+                        combo.Content = mod.GetValue("displayName") + " - v" + mod.GetValue("currentVersion");
                         mSelect.Items.Add(combo);
                     }
                     log("Fetched mod data!");
-                }else
+                } else
                 {
                     log("Failed to fetch " + game + " mods.");
                 }
             }
+        }
+
+        private void installHandler(object sender, RoutedEventArgs e)
+        {
+            string tmpDirectory = System.IO.Path.GetTempPath();
+            string downloadLink = ""; // TODO (MikaalSky): Download links
+            string randFilename = System.IO.Path.GetRandomFileName();
+
+            //Console.WriteLine(tmpDirectory);
+            //Console.WriteLine(randFilename);
+
+            // This routine will download the file at the URL specified in 'downloadLink',
+            //  and save it in the Temporary directory ('tmpDirectory') using the file name specified in 'randFilename'.
+            using (System.Net.WebClient wc = new System.Net.WebClient())
+            {
+                wc.DownloadFile(new Uri(downloadLink), System.IO.Path.Combine(tmpDirectory, randFilename));
+            }
+
+            // TODO (MikaalSky): Do everything else install-related.
         }
     }
 }
