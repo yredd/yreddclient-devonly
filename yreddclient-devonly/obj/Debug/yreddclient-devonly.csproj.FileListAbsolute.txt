@@ -29,3 +29,5 @@ C:\Users\Lokio Case\Documents\GitHub\yreddclient-devonly\yreddclient-devonly\obj
 C:\Users\Lokio Case\Documents\GitHub\yreddclient-devonly\yreddclient-devonly\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Lokio Case\Documents\GitHub\yreddclient-devonly\yreddclient-devonly\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Lokio Case\Documents\GitHub\yreddclient-devonly\yreddclient-devonly\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lokio\Documents\yredd\yreddclient-devonly\yreddclient-devonly\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\lokio\Documents\yredd\yreddclient-devonly\yreddclient-devonly\bin\Debug\Newtonsoft.Json.xml

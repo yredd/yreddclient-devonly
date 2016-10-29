@@ -136,5 +136,10 @@ namespace yreddclient_devonly
                 }
             }
         }
+
+        private void install(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
