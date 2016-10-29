@@ -98,6 +98,8 @@ namespace yreddclient_devonly
             }
         }
 
+        string currentGame = "";
+
         private async void updateMods(object sender, RoutedEventArgs e)
         {
             log("Updating mod listings...");
@@ -108,6 +110,7 @@ namespace yreddclient_devonly
             } else
             {
                 var game = ((ComboBoxItem)game1).Name;
+                currentGame = game;
                 var mods = await GetJson("http://localhost/mods/" + game + "/list");
                 if (mods != null) {
                     //log(mods.ToString());
@@ -139,21 +142,46 @@ namespace yreddclient_devonly
 
         private void installHandler(object sender, RoutedEventArgs e)
         {
-            string tmpDirectory = System.IO.Path.GetTempPath();
-            string downloadLink = ""; // TODO (MikaalSky): Download links
-            string randFilename = System.IO.Path.GetRandomFileName();
+            string tmpDirectory = System.IO.Path.GetTempPath() + "yredd\\";
+            string downloadLink = "http://localhost/mods/" + currentGame + "/hostedmods/" + "1928.zip"; // TODO (MikaalSky): Download links
+            string randFilename = System.IO.Path.GetRandomFileName() + ".zip";
 
             //Console.WriteLine(tmpDirectory);
             //Console.WriteLine(randFilename);
 
             // This routine will download the file at the URL specified in 'downloadLink',
             //  and save it in the Temporary directory ('tmpDirectory') using the file name specified in 'randFilename'.
+            if (!Directory.Exists(tmpDirectory))
+            {
+                Directory.CreateDirectory(tmpDirectory);
+            }
+            string filePath = System.IO.Path.Combine(tmpDirectory, randFilename);
+
             using (System.Net.WebClient wc = new System.Net.WebClient())
             {
-                wc.DownloadFile(new Uri(downloadLink), System.IO.Path.Combine(tmpDirectory, randFilename));
+                wc.DownloadFileAsync(new Uri(downloadLink), filePath);
+                wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(modfileDownloadComplete);
+                wc.DownloadProgressChanged += new System.Net.DownloadProgressChangedEventHandler(modfileDownloadProgress);
             }
+            log("downloading to: " + filePath);
+            //log
+            
+        }
+        
+        private void modfileDownloadComplete(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            if(e.Error == null)
+            {
+                log("Download completed successfully.");
+            }else
+            {
+                log("Error during download: " + e.Error.Message);
+            }
+        }
 
-            // TODO (MikaalSky): Do everything else install-related.
+        private void modfileDownloadProgress(object sender, System.Net.DownloadProgressChangedEventArgs e)
+        {
+            progress.Value = (e.ProgressPercentage);
         }
     }
 }
